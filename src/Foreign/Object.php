@@ -46,21 +46,21 @@ $_mapWithKey = function($m0, $f = null) use (&$_mapWithKey) {
     return $m;
 };
 
-$_foldM = function($bind) use (&$_foldM) {
-    return function($f) use ($bind) {
-        return function($mz) use ($bind, $f) {
-            return function($m) use ($bind, $f, $mz) {
-                $acc = $mz;
-                foreach ($m as $k => $v) {
-                    $g = function($z) use ($f, $k, $v) {
-                        return $f($z)($k)($v);
-                    };
-                    $acc = $bind($acc)($g);
-                }
-                return $acc;
-            };
+$_foldM = function($bind, $f = null, $mz = null, $m = null) use (&$_foldM) {
+    if (func_num_args() < 4) {
+        $__args = func_get_args();
+        return function(...$more) use ($__args, &$_foldM) {
+            return $_foldM(...array_merge($__args, $more));
         };
-    };
+    }
+    $acc = $mz;
+    foreach ($m as $k => $v) {
+        $g = function($z) use ($f, $k, $v) {
+            return $f($z)($k)($v);
+        };
+        $acc = $bind($acc)($g);
+    }
+    return $acc;
 };
 
 $_foldSCObject = function($m, $z = null, $f = null, $fromMaybe = null) use (&$_foldSCObject) {
