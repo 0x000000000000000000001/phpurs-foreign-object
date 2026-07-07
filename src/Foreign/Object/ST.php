@@ -7,7 +7,7 @@ $new = function() use (&$new) {
 $peekImpl = function($just, $nothing = null, $k = null, $m = null) use (&$peekImpl) {
     if (func_num_args() < 4) {
         $__args = func_get_args();
-        return function(...$more) use ($__args, &$new) {
+        return function(...$more) use ($__args, &$peekImpl) {
 
             return $peekImpl(...array_merge($__args, $more));
         };
@@ -20,7 +20,7 @@ $peekImpl = function($just, $nothing = null, $k = null, $m = null) use (&$peekIm
 $poke = function($k, $v = null, $m = null) use (&$poke) {
     if (func_num_args() < 3) {
         $__args = func_get_args();
-        return function(...$more) use ($__args, &$peekImpl) {
+        return function(...$more) use ($__args, &$poke) {
 
             return $poke(...array_merge($__args, $more));
         };
@@ -34,7 +34,7 @@ $poke = function($k, $v = null, $m = null) use (&$poke) {
 $delete = function($k, $m = null) use (&$delete) {
     if (func_num_args() < 2) {
         $__args = func_get_args();
-        return function(...$more) use ($__args, &$poke) {
+        return function(...$more) use ($__args, &$delete) {
 
             return $delete(...array_merge($__args, $more));
         };
