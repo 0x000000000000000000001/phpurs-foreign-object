@@ -17,11 +17,11 @@ $runST = function($f) use (&$runST) {
 };
 
 $_fmapObject = function($m0, $f = null) use (&$_fmapObject) {
-    if (func_num_args() < 2) {
-        $__args = func_get_args();
+    if (\func_num_args() < 2) {
+        $__args = \func_get_args();
         return function(...$more) use ($__args, &$_fmapObject) {
 
-            return $_fmapObject(...array_merge($__args, $more));
+            return $_fmapObject(...\array_merge($__args, $more));
         };
     }
     $m = new \stdClass();
@@ -32,11 +32,11 @@ $_fmapObject = function($m0, $f = null) use (&$_fmapObject) {
 };
 
 $_mapWithKey = function($m0, $f = null) use (&$_mapWithKey) {
-    if (func_num_args() < 2) {
-        $__args = func_get_args();
+    if (\func_num_args() < 2) {
+        $__args = \func_get_args();
         return function(...$more) use ($__args, &$_mapWithKey) {
 
-            return $_mapWithKey(...array_merge($__args, $more));
+            return $_mapWithKey(...\array_merge($__args, $more));
         };
     }
     $m = new \stdClass();
@@ -47,10 +47,10 @@ $_mapWithKey = function($m0, $f = null) use (&$_mapWithKey) {
 };
 
 $_foldM = function($bind, $f = null, $mz = null, $m = null) use (&$_foldM) {
-    if (func_num_args() < 4) {
-        $__args = func_get_args();
+    if (\func_num_args() < 4) {
+        $__args = \func_get_args();
         return function(...$more) use ($__args, &$_foldM) {
-            return $_foldM(...array_merge($__args, $more));
+            return $_foldM(...\array_merge($__args, $more));
         };
     }
     $acc = $mz;
@@ -64,11 +64,11 @@ $_foldM = function($bind, $f = null, $mz = null, $m = null) use (&$_foldM) {
 };
 
 $_foldSCObject = function($m, $z = null, $f = null, $fromMaybe = null) use (&$_foldSCObject) {
-    if (func_num_args() < 4) {
-        $__args = func_get_args();
+    if (\func_num_args() < 4) {
+        $__args = \func_get_args();
         return function(...$more) use ($__args, &$_foldSCObject) {
 
-            return $_foldSCObject(...array_merge($__args, $more));
+            return $_foldSCObject(...\array_merge($__args, $more));
         };
     }
     $acc = $z;
@@ -82,11 +82,11 @@ $_foldSCObject = function($m, $z = null, $f = null, $fromMaybe = null) use (&$_f
 };
 
 $all = function($f, $m = null) use (&$all) {
-    if (func_num_args() < 2) {
-        $__args = func_get_args();
+    if (\func_num_args() < 2) {
+        $__args = \func_get_args();
         return function(...$more) use ($__args, &$all) {
 
-            return $all(...array_merge($__args, $more));
+            return $all(...\array_merge($__args, $more));
         };
     }
     foreach ($m as $k => $v) {
@@ -104,22 +104,22 @@ $size = function($m) use (&$size) {
 };
 
 $_lookup = function($no, $yes = null, $k = null, $m = null) use (&$_lookup) {
-    if (func_num_args() < 4) {
-        $__args = func_get_args();
+    if (\func_num_args() < 4) {
+        $__args = \func_get_args();
         return function(...$more) use ($__args, &$_lookup) {
 
-            return $_lookup(...array_merge($__args, $more));
+            return $_lookup(...\array_merge($__args, $more));
         };
     }
     return property_exists($m, $k) ? $yes($m->$k) : $no;
 };
 
 $_lookupST = function($no, $yes = null, $k = null, $m = null) use (&$_lookupST) {
-    if (func_num_args() < 4) {
-        $__args = func_get_args();
+    if (\func_num_args() < 4) {
+        $__args = \func_get_args();
         return function(...$more) use ($__args, &$_lookupST) {
 
-            return $_lookupST(...array_merge($__args, $more));
+            return $_lookupST(...\array_merge($__args, $more));
         };
     }
     return function() use ($no, $yes, $k, $m) {
@@ -128,11 +128,11 @@ $_lookupST = function($no, $yes = null, $k = null, $m = null) use (&$_lookupST) 
 };
 
 $toArrayWithKey = function($f, $m = null) use (&$toArrayWithKey) {
-    if (func_num_args() < 2) {
-        $__args = func_get_args();
+    if (\func_num_args() < 2) {
+        $__args = \func_get_args();
         return function(...$more) use ($__args, &$toArrayWithKey) {
 
-            return $toArrayWithKey(...array_merge($__args, $more));
+            return $toArrayWithKey(...\array_merge($__args, $more));
         };
     }
     $r = [];
