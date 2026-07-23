@@ -1,6 +1,6 @@
 <?php
 
-$_copyST = function($m) use (&$_copyST) {
+$_copyST = function($m) {
     return function() use ($m) {
         $r = new \stdClass();
         foreach ($m as $k => $v) {
@@ -12,7 +12,7 @@ $_copyST = function($m) use (&$_copyST) {
 
 $empty = new \stdClass();
 
-$runST = function($f) use (&$runST) {
+$runST = function($f) {
     return $f();
 };
 
@@ -95,7 +95,7 @@ $all = function($f, $m = null) use (&$all) {
     return true;
 };
 
-$size = function($m) use (&$size) {
+$size = function($m) {
     $s = 0;
     foreach ($m as $k => $v) {
         $s++;
@@ -142,7 +142,7 @@ $toArrayWithKey = function($f, $m = null) use (&$toArrayWithKey) {
     return $r;
 };
 
-$keys = function($m) use (&$keys) {
+$keys = function($m) {
     $r = [];
     foreach ($m as $k => $v) {
         $r[] = (string)$k;

@@ -1,6 +1,6 @@
 <?php
 
-$unsafeFreeze = function($m) use (&$unsafeFreeze) {
+$unsafeFreeze = function($m) {
     return function() use ($m) {
         return $m;
     };

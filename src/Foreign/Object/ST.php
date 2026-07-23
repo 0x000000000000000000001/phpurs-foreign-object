@@ -1,6 +1,6 @@
 <?php
 
-$new = function() use (&$new) {
+$new = function() {
     return new \stdClass();
 };
 
