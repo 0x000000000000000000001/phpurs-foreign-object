@@ -4,41 +4,20 @@ $new = function() {
     return new \stdClass();
 };
 
-$peekImpl = function($just, $nothing = null, $k = null, $m = null) use (&$peekImpl) {
-    if (\func_num_args() < 4) {
-        $__args = \func_get_args();
-        return function(...$more) use ($__args, &$peekImpl) {
-
-            return $peekImpl(...\array_merge($__args, $more));
-        };
-    }
+$peekImpl = function($just, $nothing, $k, $m) use (&$peekImpl) {
     return function() use ($just, $nothing, $k, $m) {
         return property_exists($m, $k) ? $just($m->$k) : $nothing;
     };
 };
 
-$poke = function($k, $v = null, $m = null) use (&$poke) {
-    if (\func_num_args() < 3) {
-        $__args = \func_get_args();
-        return function(...$more) use ($__args, &$poke) {
-
-            return $poke(...\array_merge($__args, $more));
-        };
-    }
+$poke = function($k, $v, $m) use (&$poke) {
     return function() use ($k, $v, $m) {
         $m->$k = $v;
         return $m;
     };
 };
 
-$delete = function($k, $m = null) use (&$delete) {
-    if (\func_num_args() < 2) {
-        $__args = \func_get_args();
-        return function(...$more) use ($__args, &$delete) {
-
-            return $delete(...\array_merge($__args, $more));
-        };
-    }
+$delete = function($k, $m) use (&$delete) {
     return function() use ($k, $m) {
         unset($m->$k);
         return $m;

@@ -16,14 +16,7 @@ $runST = function($f) {
     return $f();
 };
 
-$_fmapObject = function($m0, $f = null) use (&$_fmapObject) {
-    if (\func_num_args() < 2) {
-        $__args = \func_get_args();
-        return function(...$more) use ($__args, &$_fmapObject) {
-
-            return $_fmapObject(...\array_merge($__args, $more));
-        };
-    }
+$_fmapObject = function($m0, $f) use (&$_fmapObject) {
     $m = new \stdClass();
     foreach ($m0 as $k => $v) {
         $m->$k = $f($v);
@@ -31,14 +24,7 @@ $_fmapObject = function($m0, $f = null) use (&$_fmapObject) {
     return $m;
 };
 
-$_mapWithKey = function($m0, $f = null) use (&$_mapWithKey) {
-    if (\func_num_args() < 2) {
-        $__args = \func_get_args();
-        return function(...$more) use ($__args, &$_mapWithKey) {
-
-            return $_mapWithKey(...\array_merge($__args, $more));
-        };
-    }
+$_mapWithKey = function($m0, $f) use (&$_mapWithKey) {
     $m = new \stdClass();
     foreach ($m0 as $k => $v) {
         $m->$k = $f($k)($v);
@@ -46,13 +32,7 @@ $_mapWithKey = function($m0, $f = null) use (&$_mapWithKey) {
     return $m;
 };
 
-$_foldM = function($bind, $f = null, $mz = null, $m = null) use (&$_foldM) {
-    if (\func_num_args() < 4) {
-        $__args = \func_get_args();
-        return function(...$more) use ($__args, &$_foldM) {
-            return $_foldM(...\array_merge($__args, $more));
-        };
-    }
+$_foldM = function($bind, $f, $mz, $m) use (&$_foldM) {
     $acc = $mz;
     foreach ($m as $k => $v) {
         $g = function($z) use ($f, $k, $v) {
@@ -63,14 +43,7 @@ $_foldM = function($bind, $f = null, $mz = null, $m = null) use (&$_foldM) {
     return $acc;
 };
 
-$_foldSCObject = function($m, $z = null, $f = null, $fromMaybe = null) use (&$_foldSCObject) {
-    if (\func_num_args() < 4) {
-        $__args = \func_get_args();
-        return function(...$more) use ($__args, &$_foldSCObject) {
-
-            return $_foldSCObject(...\array_merge($__args, $more));
-        };
-    }
+$_foldSCObject = function($m, $z, $f, $fromMaybe) use (&$_foldSCObject) {
     $acc = $z;
     foreach ($m as $k => $v) {
         $maybeR = $f($acc)($k)($v);
@@ -81,14 +54,7 @@ $_foldSCObject = function($m, $z = null, $f = null, $fromMaybe = null) use (&$_f
     return $acc;
 };
 
-$all = function($f, $m = null) use (&$all) {
-    if (\func_num_args() < 2) {
-        $__args = \func_get_args();
-        return function(...$more) use ($__args, &$all) {
-
-            return $all(...\array_merge($__args, $more));
-        };
-    }
+$all = function($f, $m) use (&$all) {
     foreach ($m as $k => $v) {
         if (!$f($k)($v)) return false;
     }
@@ -103,38 +69,17 @@ $size = function($m) {
     return $s;
 };
 
-$_lookup = function($no, $yes = null, $k = null, $m = null) use (&$_lookup) {
-    if (\func_num_args() < 4) {
-        $__args = \func_get_args();
-        return function(...$more) use ($__args, &$_lookup) {
-
-            return $_lookup(...\array_merge($__args, $more));
-        };
-    }
+$_lookup = function($no, $yes, $k, $m) use (&$_lookup) {
     return property_exists($m, $k) ? $yes($m->$k) : $no;
 };
 
-$_lookupST = function($no, $yes = null, $k = null, $m = null) use (&$_lookupST) {
-    if (\func_num_args() < 4) {
-        $__args = \func_get_args();
-        return function(...$more) use ($__args, &$_lookupST) {
-
-            return $_lookupST(...\array_merge($__args, $more));
-        };
-    }
+$_lookupST = function($no, $yes, $k, $m) use (&$_lookupST) {
     return function() use ($no, $yes, $k, $m) {
         return property_exists($m, $k) ? $yes($m->$k) : $no;
     };
 };
 
-$toArrayWithKey = function($f, $m = null) use (&$toArrayWithKey) {
-    if (\func_num_args() < 2) {
-        $__args = \func_get_args();
-        return function(...$more) use ($__args, &$toArrayWithKey) {
-
-            return $toArrayWithKey(...\array_merge($__args, $more));
-        };
-    }
+$toArrayWithKey = function($f, $m) use (&$toArrayWithKey) {
     $r = [];
     foreach ($m as $k => $v) {
         $r[] = $f($k)($v);
